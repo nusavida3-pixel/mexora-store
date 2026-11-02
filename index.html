@@ -1,71 +1,61 @@
 <!doctype html>
 <html lang="id">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#090b18">
-  <title>MEXORA — Game & Digital Store</title>
-  <meta name="description" content="Top up game dan produk digital dengan mudah di MEXORA STORE.">
-  <link rel="stylesheet" href="style.css">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#090b18">
+<title>MEXORA — Game & Digital Store</title>
+<meta name="description" content="Top up game dan produk digital favorit di MEXORA STORE.">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="announcement">⚡ MEXORA STORE — Top up game & produk digital dalam satu tempat</div>
-  <header class="site-header">
-    <a class="brand" href="#"><span class="brand-mark">M</span><span>MEXORA<span class="brand-sub">STORE</span></span></a>
-    <nav class="desktop-nav">
-      <a href="#beranda">Beranda</a><a href="#produk">Produk</a><a href="#cara">Cara Order</a><a href="#bantuan">Bantuan</a>
-    </nav>
-    <button class="cart-button" id="openCart" aria-label="Buka keranjang">Keranjang <span id="cartCount">0</span></button>
-  </header>
-
-  <main>
-    <section class="hero" id="beranda">
-      <div class="hero-copy">
-        <div class="eyebrow"><span class="pulse"></span> DIGITAL GAMING MARKETPLACE</div>
-        <h1>LEVEL UP<br><span>YOUR GAME.</span></h1>
-        <p>Top up game dan kebutuhan digital favoritmu dengan proses order yang simpel. Pilih produk, masukkan data akun, lalu checkout.</p>
-        <div class="hero-actions"><a class="primary-btn" href="#produk">Jelajahi Produk <span>↗</span></a><a class="text-link" href="#cara">Cara order <span>→</span></a></div>
-        <div class="hero-stats"><div><strong>MUDAH</strong><small>Proses pemesanan</small></div><div><strong>CEPAT</strong><small>Alur checkout</small></div><div><strong>AMAN</strong><small>Cek data sebelum order</small></div></div>
-      </div>
-      <div class="hero-art" aria-label="Ilustrasi suasana gaming">
-        <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
-        <div class="game-scene scene-ml"><span class="scene-tag">MOBA ARENA</span><div class="sword">✦</div><div class="scene-title">HERO<br>LEGENDS</div></div>
-        <div class="game-scene scene-pubg"><span class="scene-tag">BATTLE ROYALE</span><div class="target">✚</div><div class="scene-title">DROP<br>IN.</div></div>
-        <div class="game-scene scene-roblox"><span class="scene-tag">BUILD & PLAY</span><div class="block-person"><i></i><b></b><em></em></div><div class="scene-title">PLAY<br>MORE.</div></div>
-        <div class="game-scene scene-fire"><span class="scene-tag">SURVIVAL</span><div class="parachute">◡</div><div class="scene-title">OWN<br>THE SKY.</div></div>
-        <div class="art-caption">PILIH GAME FAVORITMU <span>● ● ● ●</span></div>
-      </div>
-    </section>
-
-    <section class="trust-strip"><div>✦ Pilihan produk digital</div><div>✦ Checkout praktis</div><div>✦ Bantuan melalui WhatsApp</div></section>
-
-    <section class="section" id="produk">
-      <div class="section-heading"><div><div class="eyebrow">TEMUKAN KEBUTUHANMU</div><h2>Produk <span>Populer</span></h2></div><p>Pilih kategori dan produk yang ingin kamu pesan.</p></div>
-      <div class="filter-row" id="filters">
-        <button class="filter active" data-filter="Semua">Semua</button>
-        <button class="filter" data-filter="Game">Top Up Game</button>
-        <button class="filter" data-filter="Digital">Produk Digital</button>
-        <button class="filter" data-filter="Pulsa">Pulsa</button>
-      </div>
-      <div class="product-grid" id="productGrid"></div>
-    </section>
-
-    <section class="how-section" id="cara">
-      <div class="section-heading"><div><div class="eyebrow">GAMPANG BANGET</div><h2>Cara <span>Order</span></h2></div><p>Ikuti tiga langkah sederhana untuk mengirim pesanan.</p></div>
-      <div class="steps"><article><b>01</b><div class="step-icon">▦</div><h3>Pilih produk</h3><p>Pilih game atau produk digital yang tersedia di katalog.</p></article><article><b>02</b><div class="step-icon">⌨</div><h3>Isi detail</h3><p>Masukkan User ID atau detail produk yang diperlukan.</p></article><article><b>03</b><div class="step-icon">➤</div><h3>Kirim pesanan</h3><p>Periksa keranjang lalu lanjutkan checkout melalui WhatsApp admin.</p></article></div>
-    </section>
-
-    <section class="help-banner" id="bantuan"><div><div class="eyebrow">BUTUH BANTUAN?</div><h2>Siap bantu order kamu.</h2><p>Hubungi admin jika kamu punya pertanyaan tentang produk atau pesanan.</p></div><a class="primary-btn" id="helpLink" href="#">Chat Admin <span>↗</span></a></section>
-  </main>
-
-  <footer><a class="brand" href="#"><span class="brand-mark">M</span><span>MEXORA<span class="brand-sub">STORE</span></span></a><p>© <span id="year"></span> MEXORA STORE. All rights reserved.</p><small>Harga dan ketersediaan produk dikonfirmasi oleh admin.</small></footer>
-
-  <div class="overlay" id="overlay"></div>
-  <aside class="cart-drawer" id="cartDrawer" aria-label="Keranjang belanja">
-    <div class="drawer-head"><div><div class="eyebrow">PESANAN KAMU</div><h2>Keranjang</h2></div><button class="close-btn" id="closeCart" aria-label="Tutup">×</button></div>
-    <div class="cart-items" id="cartItems"><div class="empty-cart">Keranjang masih kosong.<br>Pilih produk untuk mulai order.</div></div>
-    <div class="drawer-bottom"><label for="customerNote">Catatan / User ID (opsional)</label><textarea id="customerNote" placeholder="Contoh: User ID, Server ID, atau catatan pesanan"></textarea><div class="cart-total"><span>Jumlah item</span><strong id="itemTotal">0</strong></div><button class="primary-btn checkout-btn" id="checkout">Checkout via WhatsApp ↗</button><small class="checkout-hint">Nomor WhatsApp admin perlu diatur di file script.js.</small></div>
-  </aside>
-  <script src="products.js"></script><script src="script.js"></script>
-</body>
-</html>
+<div class="announcement">⚡ MEXORA STORE — TOP UP GAME & PRODUK DIGITAL</div>
+<header class="site-header">
+ <a class="brand" href="#"><span class="brand-mark">M</span><span>MEXORA<span class="brand-sub">DIGITAL STORE</span></span></a>
+ <nav class="desktop-nav"><a href="#beranda">Beranda</a><a href="#produk">Produk Populer</a><a href="#katalog">Katalog</a><a href="#cara">Cara Order</a></nav>
+ <button class="cart-button" id="openCart">Keranjang <span id="cartCount">0</span></button>
+</header>
+<main>
+ <section class="hero" id="beranda">
+  <div class="hero-copy">
+   <div class="eyebrow"><span class="pulse"></span> MEXORA DIGITAL STORE</div>
+   <h1>LEVEL UP<br><span>PERMAINANMU.</span></h1>
+   <p>Top up game dan kebutuhan digital favoritmu dengan proses pemesanan yang praktis.</p>
+   <div class="hero-actions"><a class="primary-btn" href="#katalog">Jelajahi Katalog <span>↗</span></a><a class="text-link" href="#cara">Cara order →</a></div>
+  </div>
+ </section>
+ <section class="trust-strip"><div>✦ Pilihan produk digital</div><div>✦ Pemesanan praktis</div><div>✦ Bantuan melalui WhatsApp</div></section>
+ <section class="section" id="produk">
+  <div class="section-heading"><div><div class="eyebrow">YANG LAGI DICARI</div><h2>Produk <span>Populer</span></h2></div><p>Pilihan produk favorit yang bisa langsung kamu pilih.</p></div>
+  <div class="popular-grid" id="popularGrid"></div>
+ </section>
+ <section class="section catalog-section" id="katalog">
+  <div class="section-heading"><div><div class="eyebrow">PILIH SESUAI KEBUTUHAN</div><h2>Katalog <span>Produk</span></h2></div><p>Pilih kategori untuk melihat game dan produk yang tersedia.</p></div>
+  <div class="category-grid">
+   <button class="category-card cat-game" data-category="Game"><span class="category-art">⚔️</span><span class="category-title">TOP UP GAMES</span><small>Mobile Legends, Free Fire, PUBG, Roblox</small><b>LIHAT GAME ↗</b></button>
+   <button class="category-card cat-digital" data-category="Digital"><span class="category-art">✦</span><span class="category-title">PRODUK DIGITAL</span><small>Netflix, Viu, WeTV, Telegram</small><b>LIHAT PRODUK ↗</b></button>
+   <button class="category-card cat-pulsa" data-category="Pulsa"><span class="category-art">▣</span><span class="category-title">PULSA & DATA</span><small>Pulsa dan paket data</small><b>LIHAT PRODUK ↗</b></button>
+   <button class="category-card cat-voucher" data-category="Voucher"><span class="category-art">🎟</span><span class="category-title">VOUCHER ENTERTAINMENT</span><small>Voucher hiburan dan saldo digital</small><b>LIHAT PRODUK ↗</b></button>
+  </div>
+  <div class="catalog-results" id="catalogResults" hidden>
+   <div class="catalog-results-head"><div><div class="eyebrow">PILIH PRODUK</div><h3 id="catalogTitle">Top Up Games</h3></div><button class="back-categories" id="backCategories">← Semua kategori</button></div>
+   <div class="product-grid" id="productGrid"></div>
+  </div>
+ </section>
+ <section class="how-section" id="cara">
+  <div class="section-heading"><div><div class="eyebrow">GAMPANG BANGET</div><h2>Cara <span>Order</span></h2></div><p>Ikuti tiga langkah sederhana untuk mengirim pesanan.</p></div>
+  <div class="steps"><article><b>01</b><div class="step-icon">▦</div><h3>Pilih kategori & produk</h3><p>Pilih kategori, lalu pilih game atau produk yang kamu inginkan.</p></article><article><b>02</b><div class="step-icon">✦</div><h3>Pilih nominal</h3><p>Pilih variasi diamond, UC, paket, atau nominal produk.</p></article><article><b>03</b><div class="step-icon">➤</div><h3>Kirim pesanan</h3><p>Isi User ID bila diperlukan, lalu lanjutkan order ke WhatsApp admin.</p></article></div>
+ </section>
+ <section class="help-banner" id="bantuan"><div><div class="eyebrow">BUTUH BANTUAN?</div><h2>Siap bantu order kamu.</h2><p>Hubungi admin jika kamu punya pertanyaan tentang produk atau pesanan.</p></div><a class="primary-btn" id="helpLink" href="#">Chat Admin <span>↗</span></a></section>
+</main>
+<footer><a class="brand" href="#"><span class="brand-mark">M</span><span>MEXORA<span class="brand-sub">DIGITAL STORE</span></span></a><p>© <span id="year"></span> MEXORA STORE. All rights reserved.</p><small>Harga dan ketersediaan produk dikonfirmasi oleh admin.</small></footer>
+<div class="modal-backdrop" id="variantBackdrop">
+ <div class="variant-modal"><div class="modal-head"><div><div class="eyebrow">PILIH VARIASI</div><h2 id="variantTitle">Mobile Legends</h2></div><button class="close-btn" id="closeVariant">×</button></div><p class="modal-desc" id="variantDesc">Pilih nominal yang kamu inginkan.</p><div class="variant-grid" id="variantGrid"></div></div>
+</div>
+<div class="overlay" id="overlay"></div>
+<aside class="cart-drawer" id="cartDrawer" aria-label="Keranjang belanja">
+ <div class="drawer-head"><div><div class="eyebrow">PESANAN KAMU</div><h2>Keranjang</h2></div><button class="close-btn" id="closeCart">×</button></div>
+ <div class="cart-items" id="cartItems"><div class="empty-cart">Keranjang masih kosong.<br>Pilih produk untuk mulai order.</div></div>
+ <div class="drawer-bottom"><label for="customerNote">User ID / nomor tujuan / catatan</label><textarea id="customerNote" placeholder="Contoh: User ID, Server ID, nomor HP, atau catatan pesanan"></textarea><div class="cart-total"><span>Jumlah item</span><strong id="itemTotal">0</strong></div><button class="primary-btn checkout-btn" id="checkout">Checkout via WhatsApp ↗</button><small class="checkout-hint">Harga akan dikonfirmasi admin. Nomor WhatsApp perlu diatur di script.js.</small></div>
+</aside>
+<script src="products.js"></script><script src="script.js"></script>
+</body></html>
