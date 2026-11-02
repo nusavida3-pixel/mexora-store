@@ -1,1 +1,98 @@
 
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#090d18">
+  <title>MEXORA DIGITAL STORE</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="navbar">
+    <a href="#" class="brand" onclick="showHome(); return false;">
+      <span class="brand-icon">✦</span>
+      <span>MEXORA<span class="brand-accent"> STORE</span></span>
+    </a>
+    <div class="nav-label">GAME TOP-UP • DIGITAL PRODUCTS</div>
+  </header>
+
+  <main class="container">
+
+    <section class="hero">
+      <div class="hero-content">
+        <span class="hero-tag">✦ MEXORA GAMING STORE</span>
+        <h1>LEVEL UP YOUR<br><span>GAME EXPERIENCE.</span></h1>
+        <p>Top up game favorit, voucher, dan produk digital dengan proses mudah dan cepat.</p>
+        <button class="primary-btn" onclick="document.getElementById('catalog').scrollIntoView({behavior:'smooth'})">
+          Mulai Top Up <span>→</span>
+        </button>
+        <div class="hero-trust"><span>⚡ Proses praktis</span><span>✦ Banyak pilihan</span><span>💬 Bantuan WhatsApp</span></div>
+      </div>
+      <div class="hero-art" aria-label="Game populer">
+        <div class="art-glow"></div>
+        <div class="game-scene scene-ml"><span class="scene-kicker">MOBA ARENA</span><strong>ML</strong><small>HERO • DIAMONDS</small></div>
+        <div class="game-scene scene-pubg"><span class="scene-kicker">BATTLE ROYALE</span><strong>PUBG</strong><small>READY • AIM • FIRE</small></div>
+        <div class="game-scene scene-roblox"><span class="scene-kicker">YOUR WORLD</span><strong>ROBLOX</strong><small>PLAY • CREATE • EXPLORE</small></div>
+        <div class="game-scene scene-ff"><span class="scene-kicker">DROP ZONE</span><strong>FREE FIRE</strong><small>LAND • LOOT • WIN</small></div>
+      </div>
+    </section>
+
+    <section id="catalog" class="catalog-section">
+      <div class="section-heading">
+        <div>
+          <span class="section-label">OUR COLLECTION</span>
+          <h2 id="pageTitle">Kategori Produk</h2>
+          <p id="pageDescription">Pilih kategori produk yang kamu inginkan.</p>
+        </div>
+        <button id="backButton" class="back-btn hidden" onclick="goBack()">← Kembali</button>
+      </div>
+
+      <div id="breadcrumb" class="breadcrumb"></div>
+      <div id="catalogContent" class="catalog-grid"></div>
+    </section>
+
+    <section class="info-strip">
+      <div>⚡ <span>Proses mudah</span></div>
+      <div>🔒 <span>Transaksi praktis</span></div>
+      <div>💬 <span>Order via WhatsApp</span></div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="footer-brand">✦ MEXORA STORE</div>
+    <p>© 2026 Digital Store. All rights reserved.</p>
+  </footer>
+
+  <div id="orderModal" class="modal hidden">
+    <div class="modal-overlay" onclick="closeOrder()"></div>
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeOrder()">×</button>
+      <span class="section-label">ORDER PRODUCT</span>
+      <h2>Konfirmasi Pesanan</h2>
+
+      <div id="selectedProduct" class="selected-product"></div>
+
+      <div id="playerFields">
+        <label for="playerId">User ID / Player ID</label>
+        <input id="playerId" type="text" placeholder="Masukkan ID game">
+        <label for="serverId">Server ID </label>
+        <input id="serverId" type="text" placeholder="Masukkan Server ID">
+      </div>
+
+      <label for="buyerName">Nama Pembeli</label>
+      <input id="buyerName" type="text" placeholder="Nama kamu">
+
+      <button class="primary-btn order-submit" onclick="submitOrder()">
+        Order Sekarang via WhatsApp →
+      </button>
+      <p class="modal-note">Pastikan detail pesanan sudah benar sebelum melanjutkan.</p>
+    </div>
+  </div>
+
+  <script src="products.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
