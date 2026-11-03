@@ -38,16 +38,26 @@
   </div>
   <div class="catalog-results" id="catalogResults" hidden>
    <div class="catalog-results-head"><div><div class="eyebrow">PILIH PRODUK</div><h3 id="catalogTitle">Top Up Games</h3></div><button class="back-categories" id="backCategories">← Semua kategori</button></div>
+   <div class="catalog-tools">
+    <label class="search-box"><span>⌕</span><input id="productSearch" type="search" placeholder="Cari nama game atau produk..." autocomplete="off"></label>
+    <span class="result-count" id="resultCount">0 produk</span>
+   </div>
    <div class="product-grid" id="productGrid"></div>
+   <p class="no-results" id="noResults" hidden>Produk tidak ditemukan. Coba kata kunci lain.</p>
   </div>
  </section>
  <section class="how-section" id="cara">
   <div class="section-heading"><div><div class="eyebrow">GAMPANG BANGET</div><h2>Cara <span>Order</span></h2></div><p>Ikuti tiga langkah sederhana untuk mengirim pesanan.</p></div>
   <div class="steps"><article><b>01</b><div class="step-icon">▦</div><h3>Pilih kategori & produk</h3><p>Pilih kategori, lalu pilih game atau produk yang kamu inginkan.</p></article><article><b>02</b><div class="step-icon">✦</div><h3>Pilih nominal</h3><p>Pilih variasi diamond, UC, paket, atau nominal produk.</p></article><article><b>03</b><div class="step-icon">➤</div><h3>Kirim pesanan</h3><p>Isi User ID bila diperlukan, lalu lanjutkan order ke WhatsApp admin.</p></article></div>
  </section>
+ <section class="order-tools section" id="cek-pesanan">
+  <div class="section-heading"><div><div class="eyebrow">PANTAU ORDER</div><h2>Cek <span>Pesanan</span></h2></div><p>Masukkan kode pesanan untuk melihat status yang tersimpan di perangkat ini.</p></div>
+  <div class="order-lookup"><input id="orderLookupInput" type="text" placeholder="Contoh: MX-20261103-AB12" autocomplete="off"><button class="primary-btn" id="lookupOrder">Cek Status ↗</button></div>
+  <div id="orderLookupResult" class="order-lookup-result" aria-live="polite"></div>
+ </section>
  <section class="help-banner" id="bantuan"><div><div class="eyebrow">BUTUH BANTUAN?</div><h2>Siap bantu order kamu.</h2><p>Hubungi admin jika kamu punya pertanyaan tentang produk atau pesanan.</p></div><a class="primary-btn" id="helpLink" href="#">Chat Admin <span>↗</span></a></section>
 </main>
-<footer><a class="brand" href="#"><span class="brand-mark">M</span><span>MEXORA<span class="brand-sub">DIGITAL STORE</span></span></a><p>© <span id="year"></span> MEXORA STORE. All rights reserved.</p><small>Harga dan ketersediaan produk dikonfirmasi oleh admin.</small></footer>
+<footer><a class="brand" href="#"><span class="brand-mark">M</span><span>MEXORA<span class="brand-sub">DIGITAL STORE</span></span></a><p>© <span id="year"></span> MEXORA STORE. All rights reserved.</p><small>Harga dan ketersediaan produk dikonfirmasi oleh admin. <a href="#cek-pesanan">Cek pesanan</a></small></footer>
 <div class="modal-backdrop" id="variantBackdrop">
  <div class="variant-modal"><div class="modal-head"><div><div class="eyebrow">PILIH VARIASI</div><h2 id="variantTitle">Mobile Legends</h2></div><button class="close-btn" id="closeVariant">×</button></div><p class="modal-desc" id="variantDesc">Pilih nominal yang kamu inginkan.</p><div class="variant-grid" id="variantGrid"></div></div>
 </div>
@@ -55,7 +65,11 @@
 <aside class="cart-drawer" id="cartDrawer" aria-label="Keranjang belanja">
  <div class="drawer-head"><div><div class="eyebrow">PESANAN KAMU</div><h2>Keranjang</h2></div><button class="close-btn" id="closeCart">×</button></div>
  <div class="cart-items" id="cartItems"><div class="empty-cart">Keranjang masih kosong.<br>Pilih produk untuk mulai order.</div></div>
- <div class="drawer-bottom"><label for="customerNote">User ID / nomor tujuan / catatan</label><textarea id="customerNote" placeholder="Contoh: User ID, Server ID, nomor HP, atau catatan pesanan"></textarea><div class="cart-total"><span>Jumlah item</span><strong id="itemTotal">0</strong></div><button class="primary-btn checkout-btn" id="checkout">Checkout via WhatsApp ↗</button><small class="checkout-hint">Harga akan dikonfirmasi admin. Nomor WhatsApp perlu diatur di script.js.</small></div>
+ <div class="drawer-bottom" id="drawerBottom">
+  <label for="customerName">Nama pembeli</label><input class="checkout-input" id="customerName" type="text" placeholder="Nama kamu">
+  <label for="customerContact">Nomor WhatsApp pembeli</label><input class="checkout-input" id="customerContact" type="tel" placeholder="08xxxxxxxxxx">
+  <label for="customerTarget">User ID / nomor tujuan</label><input class="checkout-input" id="customerTarget" type="text" placeholder="Isi ID game, server ID, atau nomor tujuan">
+  <label for="customerNote">Catatan tambahan (opsional)</label><textarea id="customerNote" placeholder="Catatan pesanan jika ada"></textarea><div class="cart-total"><span>Jumlah item</span><strong id="itemTotal">0</strong></div><button class="primary-btn checkout-btn" id="checkout">Checkout via WhatsApp ↗</button><small class="checkout-hint">Pembayaran dan konfirmasi dilakukan manual oleh admin. Nomor WhatsApp bisa diganti di pengaturan script.js.</small></div>
 </aside>
 <script src="products.js"></script><script src="script.js"></script>
 </body></html>
