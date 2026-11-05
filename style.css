@@ -222,3 +222,35 @@ footer .brand-image{width:178px;height:66px}
 #produk .section-heading h2{margin-top:0}
 @media(max-width:850px){.hero.hero-banner{display:block;padding:0}.hero-banner .hero-carousel{height:56.25vw;min-height:260px;max-height:520px;width:100%;flex:none}.hero-banner-cta{left:22px;bottom:23px}}
 @media(max-width:560px){.brand-image{width:138px;height:51px}.site-header .brand-image{margin-right:auto}.drawer-head .brand-image{width:145px;height:64px}.footer .brand-image,footer .brand-image{width:145px;height:55px}.hero-banner .hero-carousel{height:62vw;min-height:230px;max-height:360px}.hero-banner-cta{left:16px;bottom:17px;padding:11px 14px;font-size:10px;gap:9px}.hero-banner .carousel-controls{right:12px;bottom:13px}.hero-banner .carousel-controls>button{width:32px;height:32px;font-size:22px}}
+
+/* MEXORA — compact region selector for region-specific popular products */
+.popular-region-filter{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin:-9px 0 22px}
+.popular-region-label{font-size:10px;font-weight:900;letter-spacing:.08em;color:#8f97b5;margin-right:3px}
+.region-chip{border:1px solid #ffffff1c;border-radius:30px;background:#11162b;color:#b9bfd8;padding:7px 11px;font:700 9px Manrope,Arial,sans-serif;cursor:pointer;transition:.18s}
+.region-chip:hover{border-color:#a99bff;color:#fff}
+.region-chip.active{background:#7251d7;border-color:#8d70ed;color:#fff;box-shadow:0 4px 14px #7251d733}
+@media(max-width:560px){
+ .popular-region-filter{gap:6px;margin:-5px 0 17px}
+ .popular-region-label{width:100%;margin:0 0 2px}
+ .region-chip{padding:7px 9px;font-size:8px}
+}
+
+
+/* MEXORA v5 — refined header and centered banner arrows */
+.site-header{justify-content:flex-start;gap:16px}
+.site-header .header-brand{display:flex;align-items:center;gap:9px;flex:0 0 auto;min-width:210px;text-decoration:none;color:#fff}
+.header-brand img{width:62px;height:54px;object-fit:cover;object-position:center;border-radius:9px}
+.header-brand-copy{display:flex;flex-direction:column;line-height:1;gap:4px;white-space:nowrap}
+.header-brand-copy strong{font:900 25px/1 'Barlow Condensed',Arial,sans-serif;letter-spacing:.045em;color:#fff}
+.header-brand-copy small{font:800 9px/1 Manrope,Arial,sans-serif;letter-spacing:.24em;color:#a98aff}
+.header-search{display:flex;align-items:center;gap:10px;flex:1;min-width:100px;max-width:650px;margin-left:auto;padding:0 15px;height:42px;border:1px solid #7652df88;border-radius:24px;background:#11152a;color:#bcaaff;box-shadow:inset 0 0 18px #5e36a322}
+.header-search span{font-size:24px;line-height:1}
+.header-search input{width:100%;min-width:0;border:0;outline:0;background:transparent;color:#fff;font:12px Manrope,Arial,sans-serif}
+.header-search input::placeholder{color:#8e96b3}
+.site-header .cart-button{flex:0 0 auto}
+.hero-banner .carousel-controls{inset:50% 0 auto 0;bottom:auto;right:auto;transform:translateY(-50%);display:flex;justify-content:space-between;align-items:center;pointer-events:none;padding:0 clamp(12px,2.2vw,30px)}
+.hero-banner .carousel-controls>button{pointer-events:auto;width:44px;height:44px;border:1px solid #ffffff55;border-radius:50%;background:#080b18a8;color:#fff;font-size:30px;display:grid;place-items:center;backdrop-filter:blur(5px)}
+.hero-banner .carousel-controls>button:hover{background:#6e42d9}
+#slideDots{position:absolute;left:50%;bottom:clamp(13px,2vw,25px);transform:translateX(-50%);pointer-events:auto}
+@media(max-width:850px){.site-header{gap:10px}.site-header .header-brand{min-width:160px}.header-brand img{width:48px;height:46px}.header-brand-copy strong{font-size:21px}.header-brand-copy small{font-size:8px}.header-search{height:38px;padding:0 11px}}
+@media(max-width:560px){.site-header{height:66px;padding-left:10px;padding-right:10px;gap:8px}.site-header .header-brand{min-width:0;gap:5px}.header-brand img{width:36px;height:38px}.header-brand-copy strong{font-size:16px}.header-brand-copy small{font-size:6px;letter-spacing:.16em}.header-search{height:34px;padding:0 8px;gap:5px}.header-search span{font-size:19px}.header-search input{font-size:9px}.site-header .cart-button{padding:8px 9px;font-size:9px}.hero-banner .carousel-controls{padding:0 9px}.hero-banner .carousel-controls>button{width:32px;height:32px;font-size:22px}}

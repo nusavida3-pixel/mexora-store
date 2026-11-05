@@ -11,8 +11,8 @@
 <div class="announcement">⚡ MEXORA STORE — TOP UP GAME & PRODUK DIGITAL</div>
 <header class="site-header">
  <button class="menu-toggle" id="menuToggle" aria-label="Buka menu">☰</button>
- <a class="brand brand-image" href="#beranda" aria-label="Mexora Store"><img src="assets/mexora-logo.png" alt="Mexora Digital Store"></a>
- <nav class="desktop-nav"><a href="#beranda">Beranda</a><a href="#produk">Produk Populer</a><a href="#katalog">Katalog</a><a href="#cara">Cara Order</a></nav>
+ <a class="header-brand" href="#beranda" aria-label="Mexora Digital Store"><img src="assets/mexora-mark.png" alt="Logo MEXORA"><span class="header-brand-copy"><strong>MEXORA</strong><small>DIGITAL STORE</small></span></a>
+ <label class="header-search" aria-label="Cari produk"><span>⌕</span><input id="headerProductSearch" type="search" placeholder="Cari game atau produk digital..." autocomplete="off"></label>
  <button class="cart-button" id="openCart">Keranjang <span id="cartCount">0</span></button>
 </header>
 <main>
@@ -26,6 +26,17 @@
  <section class="trust-strip"><div>✦ Pilihan produk digital</div><div>✦ Pemesanan praktis</div><div>✦ Bantuan melalui WhatsApp</div></section>
  <section class="section" id="produk">
   <div class="section-heading"><div><h2>Produk <span>Populer</span></h2></div><p>Pilihan produk favorit yang bisa langsung kamu pilih.</p></div>
+  <div class="popular-region-filter" id="popularRegionFilter" aria-label="Filter region Mobile Legends">
+   <span class="popular-region-label">Region</span>
+   <button type="button" class="region-chip active" data-popular-region="all" aria-pressed="true">Semua</button>
+   <button type="button" class="region-chip" data-popular-region="Indonesia" aria-pressed="false">Indonesia</button>
+   <button type="button" class="region-chip" data-popular-region="Global" aria-pressed="false">Global</button>
+   <button type="button" class="region-chip" data-popular-region="Singapore" aria-pressed="false">Singapore</button>
+   <button type="button" class="region-chip" data-popular-region="Turkey" aria-pressed="false">Turkey</button>
+   <button type="button" class="region-chip" data-popular-region="Malaysia" aria-pressed="false">Malaysia</button>
+   <button type="button" class="region-chip" data-popular-region="Russia" aria-pressed="false">Russia</button>
+   <button type="button" class="region-chip" data-popular-region="Philippines" aria-pressed="false">Philippines</button>
+  </div>
   <div class="popular-grid" id="popularGrid"></div>
  </section>
  <section class="section catalog-section" id="katalog">

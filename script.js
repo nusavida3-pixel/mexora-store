@@ -13,7 +13,8 @@ const products = [...(window.MEXORA_PRODUCTS || []),
  {id:"ssd",name:"SSD / Storage",category:"PC",tag:"PART PC",art:"pc",desc:"SSD dan media penyimpanan.",variants:["Tanyakan stok & harga"],kind:"stock"}
 ];
 const $ = id => document.getElementById(id);
-const popularIds=["ml","ff","pubg","roblox"];
+const popularIds=["ml-id","ml-global","ml-sg","ml-tr","ml-my","ml-ru","ml-ph","ff","pubg","roblox"];
+let popularRegion="all";
 const categoryNames={Game:"Top Up Games",Digital:"Produk Digital",Pulsa:"Pulsa & Data",Voucher:"Voucher Entertainment",Second:"Etalase HP Second",PC:"PC Second & Part PC"};
 const ORDER_STORAGE_KEY="mexora_orders_v2";
 let cart=[],selectedProduct=null,selectedVariant=null,activeCategory="Game",slideIndex=0;
@@ -22,14 +23,22 @@ function getOrders(){try{return JSON.parse(localStorage.getItem(ORDER_STORAGE_KE
 function saveOrders(a){localStorage.setItem(ORDER_STORAGE_KEY,JSON.stringify(a));}
 function makeOrderCode(){const d=new Date();return `MX-${d.getFullYear()}${String(d.getMonth()+1).padStart(2,"0")}${String(d.getDate()).padStart(2,"0")}-${Math.random().toString(36).slice(2,6).toUpperCase()}`;}
 function productCard(p){return `<article class="product-card"><button class="product-open" data-product="${escapeHTML(p.id)}"><div class="game-cover cover-${escapeHTML(p.art)}"><span class="cover-tag">${escapeHTML(p.tag||p.category.toUpperCase())}</span><span class="cover-figure"></span><strong>${escapeHTML(p.name)}</strong></div><div class="product-info"><span class="product-type">${escapeHTML(p.category.toUpperCase())}</span><h3>${escapeHTML(p.name)}</h3><p>${escapeHTML(p.desc)}</p><span class="choose-label">Pilih produk <b>↗</b></span></div></button></article>`;}
-function renderPopular(){$("popularGrid").innerHTML=popularIds.map(id=>products.find(p=>p.id===id)).filter(Boolean).map(productCard).join("");}
+function renderPopular(){
+ const visible=popularIds.map(id=>products.find(p=>p.id===id)).filter(Boolean)
+  .filter(p=>popularRegion==="all"||!p.region||p.region===popularRegion);
+ $("popularGrid").innerHTML=visible.map(productCard).join("");
+ document.querySelectorAll("[data-popular-region]").forEach(btn=>{
+  const active=btn.dataset.popularRegion===popularRegion;
+  btn.classList.toggle("active",active);btn.setAttribute("aria-pressed",String(active));
+ });
+}
 function renderCatalog(){const term=($("productSearch").value||"").trim().toLowerCase();const filtered=products.filter(p=>p.category===activeCategory&&`${p.name} ${p.desc} ${p.tag}`.toLowerCase().includes(term));$("productGrid").innerHTML=filtered.map(productCard).join("");$("resultCount").textContent=`${filtered.length} produk`;$("noResults").hidden=!!filtered.length;}
 function showCategory(c){activeCategory=c;$("catalogTitle").textContent=categoryNames[c]||c;$("catalogResults").hidden=false;$("productSearch").value="";renderCatalog();$("catalogResults").scrollIntoView({behavior:"smooth",block:"start"});}
 function openVariants(p){selectedProduct=p;selectedVariant=null;$("variantTitle").textContent=p.name;$("variantDesc").textContent=p.desc+" "+(p.kind==="stock"?"Pilih opsi lalu isi catatan atau jumlah yang diinginkan.":"Pilih nominal/paket, lalu isi data khusus produk ini.");$("variantGrid").innerHTML=(p.variants||["Hubungi admin"]).map((v,i)=>`<button type="button" class="variant-option" data-variant="${i}"><span>${escapeHTML(v)}</span><small>${p.kind==="stock"?"Stok dan harga dikonfirmasi admin":"Harga dikonfirmasi admin"}</small></button>`).join("");$("productFields").innerHTML=fieldsFor(p);$("variantBackdrop").classList.add("show");}
 function fieldsFor(p){
  if(p.kind==="stock")return `<label>Jumlah (opsional)<input id="itemQty" class="checkout-input" type="number" min="1" value="1"></label><label>Catatan / pertanyaan (opsional)<textarea id="itemData" placeholder="Contoh: warna, kondisi, spesifikasi yang dicari..."></textarea></label><p class="field-hint">Pesanan ini berstatus permintaan cek stok. Admin akan mengonfirmasi harga dan ketersediaan.</p>`;
  if(p.category==="Game"){
-  let extra=p.id==="ml"?'<label>User ID<input id="fieldUser" class="checkout-input" placeholder="Masukkan User ID"></label><label>Zone ID / Server ID<input id="fieldZone" class="checkout-input" placeholder="Masukkan Zone ID"></label>': '<label>Player ID / User ID<input id="fieldUser" class="checkout-input" placeholder="Masukkan ID akun game"></label>';
+  let extra=p.requiresZone?'<label>User ID<input id="fieldUser" class="checkout-input" placeholder="Masukkan User ID"></label><label>Zone ID / Server ID<input id="fieldZone" class="checkout-input" placeholder="Masukkan Zone ID"></label>': '<label>Player ID / User ID<input id="fieldUser" class="checkout-input" placeholder="Masukkan ID akun game"></label>';
   return `${extra}<label>Catatan (opsional)<textarea id="itemData" placeholder="Catatan untuk admin"></textarea></label>`;
  }
  if(p.category==="Digital")return `<label>Email / Username akun<input id="fieldUser" class="checkout-input" placeholder="Isi sesuai kebutuhan produk"></label><label>Detail paket / catatan<textarea id="itemData" placeholder="Contoh: durasi paket atau instruksi khusus"></textarea></label><p class="field-hint">Jangan masukkan password akun. Admin akan meminta data lanjutan melalui jalur aman bila memang diperlukan.</p>`;
@@ -41,14 +50,14 @@ function addSelectedItem(){
  if(!selectedProduct)return;if(selectedVariant===null){alert("Pilih nominal atau opsi produk terlebih dahulu.");return;}
  const p=selectedProduct, user=$("fieldUser")?.value.trim()||"", zone=$("fieldZone")?.value.trim()||"", note=$("itemData")?.value.trim()||"", qty=Math.max(1,Number($("itemQty")?.value||1));
  if(p.category==="Game"&&!user){alert("Isi User ID / Player ID terlebih dahulu.");return;}
- if(p.id==="ml"&&!zone){alert("Isi Zone ID Mobile Legends terlebih dahulu.");return;}
+ if(p.requiresZone&&!zone){alert("Isi Zone ID / Server ID Mobile Legends terlebih dahulu.");return;}
  if((p.category==="Digital"||p.category==="Pulsa")&&!user){alert("Isi email, username, atau nomor tujuan terlebih dahulu.");return;}
- cart.push({name:p.name,category:p.category,variant:selectedVariant,user,zone,note,qty,kind:p.kind||"digital"});
+ cart.push({name:p.name,category:p.category,region:p.region||"",variant:selectedVariant,user,zone,note,qty,kind:p.kind||"digital"});
  renderCart();closeVariants();openCart();
 }
 function renderCart(){
  $("cartCount").textContent=cart.length;$("itemTotal").textContent=cart.reduce((n,x)=>n+x.qty,0);
- $("cartItems").innerHTML=cart.length?cart.map((p,i)=>`<div class="cart-line"><div><strong>${escapeHTML(p.name)} × ${p.qty}</strong><small>${escapeHTML(p.variant)}${p.user?`<br>Data: ${escapeHTML(p.user)}`:""}${p.zone?`<br>Zone: ${escapeHTML(p.zone)}`:""}${p.note?`<br>Catatan: ${escapeHTML(p.note)}`:""}<br><em>${p.kind==="stock"?"Cek stok & harga":"Harga dikonfirmasi admin"}</em></small></div><button class="remove-item" data-remove="${i}">Hapus</button></div>`).join(""):`<div class="empty-cart">Keranjang masih kosong.<br>Pilih produk untuk mulai order.</div>`;
+ $("cartItems").innerHTML=cart.length?cart.map((p,i)=>`<div class="cart-line"><div><strong>${escapeHTML(p.name)} × ${p.qty}</strong><small>${escapeHTML(p.variant)}${p.region?`<br>Region: ${escapeHTML(p.region)}`:""}${p.user?`<br>Data: ${escapeHTML(p.user)}`:""}${p.zone?`<br>Zone: ${escapeHTML(p.zone)}`:""}${p.note?`<br>Catatan: ${escapeHTML(p.note)}`:""}<br><em>${p.kind==="stock"?"Cek stok & harga":"Harga dikonfirmasi admin"}</em></small></div><button class="remove-item" data-remove="${i}">Hapus</button></div>`).join(""):`<div class="empty-cart">Keranjang masih kosong.<br>Pilih produk untuk mulai order.</div>`;
 }
 function openCart(){$("cartDrawer").classList.add("show");$("overlay").classList.add("show");}
 function closeCart(){$("cartDrawer").classList.remove("show");$("overlay").classList.remove("show");}
@@ -61,7 +70,7 @@ function checkout(){
  const code=makeOrderCode(),items=cart.map(x=>({...x}));
  const order={code,createdAt:new Date().toISOString(),name,contact,note,items,status:"Menunggu konfirmasi admin",voucher:null};
  const orders=getOrders();orders.unshift(order);saveOrders(orders);
- const detail=items.map((p,i)=>`${i+1}. ${p.name} (${p.category})\\n   Pilihan: ${p.variant}\\n   Jumlah: ${p.qty}\\n   Data/ID: ${p.user||"-"}\\n   Zone/Server: ${p.zone||"-"}\\n   Catatan: ${p.note||"-"}\\n   Status stok: ${p.kind==="stock"?"Perlu konfirmasi admin":"Produk digital"}`).join("\\n\\n");
+ const detail=items.map((p,i)=>`${i+1}. ${p.name} (${p.category})\\n   Region: ${p.region||"-"}\\n   Pilihan: ${p.variant}\\n   Jumlah: ${p.qty}\\n   Data/ID: ${p.user||"-"}\\n   Zone/Server: ${p.zone||"-"}\\n   Catatan: ${p.note||"-"}\\n   Status stok: ${p.kind==="stock"?"Perlu konfirmasi admin":"Produk digital"}`).join("\\n\\n");
  const message=`Halo Admin MEXORA, saya ingin mengirim pesanan.\\n\\nKODE TRANSAKSI: ${code}\\nNama: ${name}\\nWhatsApp: ${contact}\\n\\n${detail}\\n\\nCatatan umum: ${note||"-"}\\n\\nMohon konfirmasi harga, stok (jika barang fisik), total pembayaran, dan metode pembayaran. Setelah pembayaran terverifikasi, mohon terbitkan voucher transaksi.`;
  if(sendWhatsApp(message)){
   $("lastOrderCode")?.remove();const hint=document.createElement("div");hint.id="lastOrderCode";hint.className="last-order-code";hint.innerHTML=`Kode transaksi: <strong>${code}</strong><br><small>Simpan kode ini. Voucher diterbitkan admin setelah pembayaran terverifikasi.</small>`;$("drawerBottom").prepend(hint);
@@ -93,6 +102,7 @@ function setupChat(){
  $("chatIG").href=MEXORA_CONFIG.instagramUrl;$("chatIG").target="_blank";
 }
 document.addEventListener("click",e=>{
+ const rb=e.target.closest("[data-popular-region]");if(rb){popularRegion=rb.dataset.popularRegion;renderPopular();}
  const pb=e.target.closest("[data-product]");if(pb){const p=products.find(x=>x.id===pb.dataset.product);if(p)openVariants(p);}
  const cb=e.target.closest("[data-category]");if(cb)showCategory(cb.dataset.category);
  const vb=e.target.closest("[data-variant]");if(vb){selectedVariant=selectedProduct.variants[Number(vb.dataset.variant)];document.querySelectorAll(".variant-option").forEach(x=>x.classList.toggle("selected",x===vb));}
@@ -102,6 +112,9 @@ document.addEventListener("click",e=>{
 $("addToCart").onclick=addSelectedItem;
 $("backCategories").onclick=()=>{$("catalogResults").hidden=true;$("katalog").scrollIntoView({behavior:"smooth"});};
 $("productSearch").addEventListener("input",renderCatalog);
+const headerSearch=$("headerProductSearch");
+headerSearch.addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();$("productSearch").value=headerSearch.value;showCategory(activeCategory);$("productSearch").value=headerSearch.value;renderCatalog();}});
+headerSearch.addEventListener("input",()=>{if(!headerSearch.value){$("productSearch").value="";renderCatalog();return;}$("productSearch").value=headerSearch.value;$("catalogResults").hidden=false;renderCatalog();});
 $("closeVariant").onclick=closeVariants;$("variantBackdrop").onclick=e=>{if(e.target===$("variantBackdrop"))closeVariants();};
 $("openCart").onclick=openCart;$("closeCart").onclick=closeCart;$("overlay").onclick=()=>{closeCart();$("sideMenu").classList.remove("show");$("overlay").classList.remove("show");};
 $("checkout").onclick=checkout;$("lookupOrder").onclick=lookupOrder;$("orderLookupInput").onkeydown=e=>{if(e.key==="Enter")lookupOrder();};
