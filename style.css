@@ -200,3 +200,25 @@ footer a{color:#a99bff}
 .chat-options a:hover{background:#28234b}
 @media(max-width:850px){.hero{display:flex;flex-direction:column;align-items:stretch}.hero-carousel{height:300px;width:100%;flex:auto}.hero-copy{width:100%}.category-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:560px){.site-header{gap:10px;padding-left:15px;padding-right:15px}.brand{font-size:14px}.brand-mark{width:32px;height:32px}.cart-button{padding:9px 11px;font-size:10px}.hero-carousel{height:230px}.news-grid{grid-template-columns:1fr}.menu-toggle{width:37px;height:37px;font-size:19px}.chat-widget{right:15px;bottom:15px}}
+
+/* MEXORA banner update: full-width image carousel, no text overlays */
+.brand-image{display:flex;align-items:center;justify-content:center;gap:0;flex:0 0 auto;width:178px;height:62px;overflow:hidden}
+.brand-image img{display:block;width:100%;height:100%;object-fit:contain;object-position:center}
+.site-header .brand-image{margin-right:auto}
+.drawer-head .brand-image{width:170px;height:76px}
+footer .brand-image{width:178px;height:66px}
+.hero.hero-banner{display:block;width:100%;max-width:none;min-height:0;height:auto;margin:0;padding:0;background:none;overflow:visible}
+.hero-banner .hero-carousel{width:100%;height:clamp(300px,56.25vw,660px);min-height:0;max-height:660px;position:relative;flex:none;border:0;border-radius:0;box-shadow:none;background:#090b18;overflow:hidden}
+.hero-banner .hero-slide{position:absolute;inset:0;display:none;padding:0;align-items:initial;background-size:cover;background-position:center;background-repeat:no-repeat}
+.hero-banner .hero-slide:after{display:none}
+.hero-banner .hero-slide.active{display:block}
+.hero-banner .hero-slide span{display:none}
+.hero-banner-cta{position:absolute;z-index:4;left:clamp(20px,7vw,100px);bottom:clamp(24px,5vw,58px);text-decoration:none}
+.hero-banner .carousel-controls{right:clamp(18px,4vw,55px);bottom:clamp(18px,3vw,35px)}
+.hero-banner .carousel-controls>button{width:40px;height:40px;font-size:27px}
+#slideDots button{width:9px;height:9px}
+#slideDots button.active{width:23px}
+#produk .section-heading{align-items:center}
+#produk .section-heading h2{margin-top:0}
+@media(max-width:850px){.hero.hero-banner{display:block;padding:0}.hero-banner .hero-carousel{height:56.25vw;min-height:260px;max-height:520px;width:100%;flex:none}.hero-banner-cta{left:22px;bottom:23px}}
+@media(max-width:560px){.brand-image{width:138px;height:51px}.site-header .brand-image{margin-right:auto}.drawer-head .brand-image{width:145px;height:64px}.footer .brand-image,footer .brand-image{width:145px;height:55px}.hero-banner .hero-carousel{height:62vw;min-height:230px;max-height:360px}.hero-banner-cta{left:16px;bottom:17px;padding:11px 14px;font-size:10px;gap:9px}.hero-banner .carousel-controls{right:12px;bottom:13px}.hero-banner .carousel-controls>button{width:32px;height:32px;font-size:22px}}
